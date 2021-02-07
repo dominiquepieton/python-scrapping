@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>json to html</title>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+<body> 
+<h1> extrait des données json en html : </h1>
+
+<script>
+
+    window.onload = function(){
+        var body = document.getElementsByTagName("body")[0];
+        var tbl = document.createElement("table");
+        var tblBody = document.createElement("tbody");
+
+        $.get("test.json", function(data){
+            for (i = 1; i < data.length; i++){
+                var article = data[i]["article"];
+                var vendeur = data[i]["vendeur"];
+                var price = data[i]["price"];
+                var img = data[i]["url_image"];
+                var row = document.createElement("tr");
+
+                var cell1 = document.createElement("td");
+                var cellText1 = document.createTextNode(vendeur);
+                    cell1.appendChild(cellText1);
+                    row.appendChild(cell1);
+                var cell2 = document.createElement("td");
+                var cellText2 = document.createTextNode(price);
+                    cell2.appendChild(cellText2);
+                    row.appendChild(cell2);
+                var cell3 = document.createElement("img");
+                var cellText3 = document.createTextNode(img);
+                    cell3.appendChild(cellText3);
+                    cell3.setAttribute("src",img);
+                    row.appendChild(cell3);
+                tblBody.appendChild(row);
+            
+            } 
+            tbl.appendChild(tblBody);
+        // appends <table> into <body>
+            body.appendChild(tbl);
+        // sets the border attribute of tbl to 2;
+            tbl.setAttribute("border", "1");   
+        });
+            //table += row + "</table>";
+            //document.write(table)
+    }
+    
+    
+</script>
+ 
+</body>
+ 
+</html>
